@@ -303,8 +303,8 @@ internal extension BidirectionalCollection where Element == ParsableCommand.Type
   }
   
   func versionArgumentDefinition() -> ArgumentDefinition? {
-    guard contains(where: { !$0.configuration.version.isEmpty })
-      else { return nil }
+    guard !(last?.configuration.version.isEmpty ?? true)
+			else { return nil }
     return ArgumentDefinition(
       kind: .named([.long("version")]),
       help: .init(help: "Show the version.", key: InputKey(rawValue: "")),
